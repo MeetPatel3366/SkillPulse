@@ -3,6 +3,9 @@ name: CI Workflow
 on:
   push:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true" # Force JavaScript actions to use Node.js 24
+
 jobs:
   build: # job name
     runs-on: ubuntu-latest # Github Runner
