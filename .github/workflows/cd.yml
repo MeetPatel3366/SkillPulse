@@ -1,0 +1,24 @@
+name: CD Workflow
+
+on:
+    workflow_run:
+        workflows: ["CI Workflow"] # Trigger this workflow after the CI Workflow is completed
+        types: [completed]
+
+jobs:
+    deploy: # job name
+        runs-on: ubuntu-latest # Github Runner
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4 # clone the code into ubuntu runner
+            - name: Execute remote SSH commands using password
+              uses: appleboy/ssh-action@v1
+              with:
+                host: ${{ secrets. EC2_HOST }}
+                username: ${{ secrets.EC2_USER }}
+                key: ${{ secrets.EC2_SSH_KEY }}
+                script: |
+                    cd ~/SkillPulse
+                    git pull origin main
+                    docker compose pull
+                    docker compose up -d
