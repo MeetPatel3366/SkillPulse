@@ -19,7 +19,18 @@ jobs:
                 key: ${{ secrets.EC2_SSH_KEY }}
                 script: |
                     # git clone https://github.com/MeetPatel3366/SkillPulse.git
+                    
+                    echo "Connected"
+
                     cd ~/SkillPulse
+
+                    echo "Git pull..."
                     git pull origin main
+
+                    echo "Docker compose pull..."
                     docker compose pull
+
+                    echo "Docker compose up..."
                     docker compose up -d
+
+                    echo "Done"
