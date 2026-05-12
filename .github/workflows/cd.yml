@@ -20,7 +20,7 @@ jobs:
                 timeout: 60s # Set a timeout for the SSH connection
                 command_timeout: 30m # Set a timeout for the remote command execution
                 script: |
-                    # git clone https://github.com/MeetPatel3366/SkillPulse.git
+                    git clone https://github.com/MeetPatel3366/SkillPulse.git
 
                     echo "Connected"
 
@@ -32,7 +32,7 @@ jobs:
                     echo "Docker compose pull..."
                     docker compose pull
 
-                    echo "Docker compose up..."
-                    docker compose up -d
+                    echo "Docker compose down & up..."
+                    docker compose down && docker compose up -d
 
                     echo "Done"
